@@ -54,60 +54,56 @@ public class NumberOfIslands{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    private int m;
+    int[] fa;
 
-    private int n;
-
-    private boolean[][] visited;
+    int m , n;
 
     public int numIslands(char[][] grid) {
-        int ans = 0;
         m = grid.length;
         n = grid[0].length;
-        visited = new boolean[m][n];
+        fa = new int[m * n];
+        for (int i = 0 ; i < fa.length ; i++) fa[i] = i;
 
-        for(int i = 0 ; i < m ; i++){
-            for(int j = 0 ; j < n ; j++){
-                visited[i][j] = false;
+        int[] dx = {-1 , 0 , 1 , 0};
+        int[] dy = {0 , 1 , 0 , -1};
+
+        for (int i = 0 ; i < m ; i++){
+            for (int j = 0 ; j < n ; j++){
+                if (grid[i][j] == '0') continue;
+
+                for (int k = 0 ; k < 4 ; k++){
+                    int ni = i + dx[k];
+                    int nj = j + dy[k];
+                    if (ni < 0 || ni >= m || nj <0 || nj>= n) continue;
+                    if (grid[ni][nj] == '1'){
+                        unionSet(num(i , j) , num(ni , nj));
+                    }
+                }
             }
         }
 
-        for(int i = 0 ; i < m ; i++){
-            for(int j = 0 ; j < n ; j++){
-                if(grid[i][j] == '1' && !visited[i][j]){
-                    bfs(grid , i , j);
-                    ans++;
-                }
+        int ans = 0;
+        for (int i = 0 ; i < fa.length ; i++){
+            if (fa[i] == i && grid[i / n][i % n]  == '1') {
+                ans++;
             }
         }
         return ans;
     }
 
-    public void bfs(char[][] grid , int sx , int sy){
-        int[] dx = new int[]{-1 , 0 ,1 , 0};
-        int[] dy = new int[]{0 , 1 ,0 , -1};
+    public int num(int i , int j){
+        return i * n + j;
+    }
 
-        Queue<Pair<Integer , Integer>> q = new LinkedList<Pair<Integer , Integer>>();
-        q.offer(new Pair<Integer , Integer>(sx,sy));
-        visited[sx][sy] = true;
+    public int find(int x){
+        if (x == fa[x]) return x;
+        return fa[x] = find(fa[x]);
+    }
 
-        while(!q.isEmpty()){
-            Pair<Integer , Integer> pair = q.poll();
-            int x = pair.getKey();
-            int y = pair.getValue();
-
-            for(int i = 0 ; i < 4 ; i++){
-                int nx = dx[i] + x;
-                int ny = dy[i] + y;
-                if(nx < 0 || ny < 0 || nx >= m || ny >= n) continue;
-                if(grid[nx][ny] == '1' && !visited[nx][ny]){
-                    q.offer(new Pair<Integer , Integer>(nx,ny));
-                    visited[nx][ny] = true;
-
-                }
-            }
-        }
-
+    public void unionSet(int x , int y){
+        x = find(x);
+        y = find(y);
+        if (x != y) fa[x] = y;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

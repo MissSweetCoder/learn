@@ -48,46 +48,40 @@ public class SurroundedRegions{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    int m;
-    int n;
-    char[][] board;
+    int[] fa;
+    int m ;
+    int n ;
 
     public void solve(char[][] board) {
-        this.board = board;
         m = board.length;
         n = board[0].length;
-        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
-        int[] dx = new int[]{-1 , 0 ,1 , 0};
-        int[] dy = new int[]{0 , 1 ,0 , -1};
+        fa = new int[m * n + 1];
+        for (int i = 0 ; i < fa.length ; i++) fa[i] = i;
 
-        for(int i = 0 ; i < m ; i++){
+        int[] dx = {-1 , 0 , 1 , 0};
+        int[] dy = {0 , 1 , 0 , -1};
+
+        int outside = m * n;
+        for (int i = 0 ; i < m ; i++){
             for (int j = 0 ; j < n ; j++){
-                if ((i ==0 || i == m - 1 || j == 0 || j == n - 1) && board[i][j] == 'O'){
-                    q.offer(new Pair<Integer,Integer>(i,j));
-                    board[i][j] = '#';
-                }
-            }
-        }
-
-        while(!q.isEmpty()){
-            Pair<Integer,Integer> pair = q.poll();
-            int i = pair.getKey();
-            int j = pair.getValue();
-            for (int k = 0 ; k < 4 ; k++){
-                int ni = dx[k] + i;
-                int nj = dy[k] + j;
-                if (valid(ni,nj)){
-                    q.offer(new Pair<Integer,Integer>(ni,nj));
-                    board[ni][nj] = '#';
+                if (board[i][j] == 'X') continue;
+                for (int k = 0 ; k < 4 ; k++){
+                    int ni = i + dx[k];
+                    int nj = j + dy[k];
+                    if (ni < 0 || ni >= m || nj < 0 || nj >= n){
+                        unionSet(num(i , j) , outside);
+                    }else {
+                        if (board[ni][nj] == 'O'){
+                            unionSet(num(i , j) , num(ni , nj));
+                        }
+                    }
                 }
             }
         }
 
         for (int i = 0 ; i < m ; i++){
             for (int j = 0 ; j < n ; j++){
-                if (board[i][j] == '#'){
-                    board[i][j] = 'O';
-                }else if (board[i][j] == 'O'){
+                if (board[i][j] == 'O' && find(num(i , j)) != find(outside)) {
                     board[i][j] = 'X';
                 }
             }
@@ -95,8 +89,19 @@ class Solution {
 
     }
 
-    public boolean valid(int i , int j){
-        return i >= 0 && i < m && j >= 0 && j < n && board[i][j] == 'O';
+    public int num(int i , int j){
+        return (i * n) + j;
+    }
+
+    public int find(int x){
+        if (x == fa[x]) return x;
+        return fa[x] = find(fa[x]);
+    }
+
+    public void unionSet(int x , int y){
+        x = find(x);
+        y = find(y);
+        if (x != y) fa[x] = y;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
