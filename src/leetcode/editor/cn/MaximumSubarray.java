@@ -53,14 +53,15 @@ public class MaximumSubarray{
 class Solution {
     public int maxSubArray(int[] nums) {
         int n = nums.length;
-        int[] f = new int[n];
-        f[0] = nums[0];
-        for (int i = 1 ; i < n ; i++){
-            f[i] = Math.max(f[i - 1] + nums[i] , nums[i]);
-        }
-        int ans = f[0];
-        for (int i = 1 ; i < n ; i++){
-            ans = Math.max(ans , f[i]);
+        int[] s = new int[n + 1];
+        s[0] = 0;
+        for (int i = 1 ; i < n + 1 ; i++) s[i] = s[i - 1] + nums[i - 1];
+        int[] preMin = new int[n + 1];
+        preMin[0] = s[0];
+        for (int i = 1 ; i < n + 1 ; i++) preMin[i] = Math.min(preMin[i - 1] , s[i]);
+        int ans = -100000;
+        for (int i = 1 ; i < n + 1 ; i++){
+            ans = Math.max(ans , s[i] - preMin[i - 1]);
         }
         return ans;
     }
