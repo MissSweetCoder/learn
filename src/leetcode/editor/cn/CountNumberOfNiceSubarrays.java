@@ -53,14 +53,19 @@ class Solution {
         int n = nums.length;
         int[] s = new int[n + 1];
         s[0] = 0;
-        for (int i =  1 ; i < n + 1 ; i++) s[i] = s[i - 1] + nums[i - 1] % 2;
-        int[] count = new int[n + 1];
-        count[s[0]]++;
+        for (int i = 1 ; i <= n ; i++) s[i] = s[i - 1] + nums[i - 1] % 2;
+        //s[i] -> count
+        Map<Integer,Integer> countMap = new HashMap<>();
+        countMap.put(s[0] , 1);
+
         int ans = 0;
-        for (int i = 1 ; i < n + 1 ; i++){
-            if (s[i] >= k) ans += count[s[i] - k];
-            count[s[i]]++;
+        for (int i = 1 ; i <= n ; i++){
+            if (s[i] - k >= 0) ans += countMap.getOrDefault(s[i] - k , 0);
+            int count = countMap.getOrDefault(s[i] , 0);
+            countMap.put(s[i] , ++count);
         }
+
+
         return ans;
     }
 }

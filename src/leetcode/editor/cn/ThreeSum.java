@@ -62,11 +62,11 @@ class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
-        for (int i = 0 ; i < nums.length ; i++) {
+        for (int i = 0 ; i < nums.length ; i++){
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-            List<List<Integer>> jks = twoSum(nums, i + 1, -nums[i]);
-            for (List<Integer> jk : jks) {
-                ans.add(Arrays.asList(new Integer[]{nums[i] , jk.get(0), jk.get(1)}));
+            List<List<Integer>> jks = twoSum(nums , i + 1 , -nums[i]);
+            for (List<Integer> jk : jks){
+                ans.add(Arrays.asList(new Integer[]{nums[i] , jk.get(0) , jk.get(1)}));
             }
         }
         return ans;
@@ -84,6 +84,8 @@ class Solution {
         }
         return ans;
     }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

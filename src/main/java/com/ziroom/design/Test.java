@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.function.BiConsumer;
 
@@ -26,20 +27,22 @@ import java.util.function.BiConsumer;
  */
 public class Test {
     public static void main(String[] args) {
-        printTimeStamp("2022-06-01 00:00:00");
-        printTimeStamp("2022-06-30 23:59:59");
-        printTimeStamp("2022-07-01 00:00:00");
-        printTimeStamp("2022-07-31 23:59:59");
-        printTimeStamp("2022-08-01 00:00:00");
-        printTimeStamp("2022-08-31 23:59:59");
-        printTimeStamp("2022-09-01 00:00:00");
-        printTimeStamp("2022-09-30 23:59:59");
-        printTimeStamp("2022-10-01 00:00:00");
-        printTimeStamp("2022-10-31 23:59:59");
-        printTimeStamp("2022-11-01 00:00:00");
-        printTimeStamp("2022-11-30 23:59:59");
-        printTimeStamp("2022-12-01 00:00:00");
-        printTimeStamp("2022-12-31 23:59:59");
+//        printTimeStamp("2022-06-01 00:00:00");
+//        printTimeStamp("2022-06-30 23:59:59");
+//        printTimeStamp("2022-07-01 00:00:00");
+//        printTimeStamp("2022-07-31 23:59:59");
+//        printTimeStamp("2022-08-01 00:00:00");
+//        printTimeStamp("2022-08-31 23:59:59");
+//        printTimeStamp("2022-09-01 00:00:00");
+//        printTimeStamp("2022-09-30 23:59:59");
+//        printTimeStamp("2022-10-01 00:00:00");
+//        printTimeStamp("2022-10-31 23:59:59");
+//        printTimeStamp("2022-11-01 00:00:00");
+//        printTimeStamp("2022-11-30 23:59:59");
+//        printTimeStamp("2022-12-01 00:00:00");
+//        printTimeStamp("2022-12-31 23:59:59");
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.computeIfPresent()
 
 //        SimpleDateFormat sdfutc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 //        System.out.println(sdfutc.format(new Date(1669197372755L)));

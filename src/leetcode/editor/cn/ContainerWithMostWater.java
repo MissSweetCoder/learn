@@ -51,7 +51,11 @@ class Solution {
         int ans = 0;
         while (i < j){
             ans = Math.max(ans , Math.min(height[i] , height[j]) * (j - i));
-            if (height[i] < height[j]) i++ ; else j--;
+            if (height[i] > height[j]){
+                j--;
+            }else {
+                i++;
+            }
         }
         return ans;
     }

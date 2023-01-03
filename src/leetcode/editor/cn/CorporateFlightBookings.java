@@ -61,19 +61,22 @@ class Solution {
     public int[] corpFlightBookings(int[][] bookings, int n) {
         int[] delta = new int[n + 2];
         for (int i = 0 ; i < bookings.length ; i++){
-            int first = bookings[i][0];
-            int second = bookings[i][1];
-            int seats = bookings[i][2];
+            int[] booking = bookings[i];
+            int first = booking[0];
+            int last = booking[1];
+            int seats = booking[2];
             delta[first] += seats;
-            delta[second + 1] -= seats;
+            delta[last + 1] -= seats;
         }
+
         int[] sum = new int[n + 1];
         for (int i = 1 ; i < n + 1 ; i++){
             sum[i] = sum[i - 1] + delta[i];
         }
+
         int[] ans = new int[n];
-        for (int i = 1 ; i < n + 1 ; i++){
-            ans[i - 1] = sum[i];
+        for (int i = 0 ; i < n ; i++){
+            ans[i] = sum[i + 1];
         }
         return ans;
     }

@@ -93,23 +93,30 @@ class Solution {
     public int myAtoi(String s) {
         int index = 0;
         int sign = 1;
-        int total = 0;
 
+        // 1. 读空格
         while (index < s.length() && s.charAt(index) == ' ') index++;
+
+        // 2. 读符号
         if (index < s.length() && (s.charAt(index) == '+' || s.charAt(index) == '-')){
             sign = s.charAt(index) == '+' ? 1 : -1;
             index++;
         }
-        while (index < s.length()){
-            int digit = s.charAt(index) - '0';
-            if (digit < 0 || digit > 9) break;
-            if ((Integer.MAX_VALUE - digit) / 10 < total){
-                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+
+        // 3. 读数字
+        int total = 0;
+        while (index < s.length() && s.charAt(index) >= '0' && s.charAt(index) <= '9'){
+            if ((Integer.MAX_VALUE - (s.charAt(index) - '0')) / 10 < total){
+                if (sign == 1){
+                    return Integer.MAX_VALUE;
+                }
+                return Integer.MIN_VALUE;
             }
-            total = total * 10 + digit;
+            total = total * 10 + s.charAt(index) - '0';
             index++;
         }
-        return total * sign;
+
+        return sign * total;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
