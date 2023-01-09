@@ -41,8 +41,8 @@ public class Test {
 //        printTimeStamp("2022-11-30 23:59:59");
 //        printTimeStamp("2022-12-01 00:00:00");
 //        printTimeStamp("2022-12-31 23:59:59");
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.computeIfPresent()
+        System.out.println('e' - 'a');
+        System.out.println('g' - 'd');
 
 //        SimpleDateFormat sdfutc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 //        System.out.println(sdfutc.format(new Date(1669197372755L)));

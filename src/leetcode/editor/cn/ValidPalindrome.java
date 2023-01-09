@@ -55,7 +55,7 @@ class Solution {
     public boolean isPalindrome(String s) {
         int l = getNext(s , 0);
         int r = getPre(s , s.length() - 1);
-        while(l < r){
+        while (l < r){
             if (!equalsIgnoreCase(s.charAt(l) , s.charAt(r))) return false;
             l = getNext(s , l + 1);
             r = getPre(s , r - 1);
@@ -63,23 +63,24 @@ class Solution {
         return true;
     }
 
-    public int getNext(String s , int i){
-        while (i < s.length() && !isDigitOrLetter(s.charAt(i))) i++;
-        return i;
-    }
-
-    public int getPre(String s , int i){
-        while (i >= 0 && !isDigitOrLetter(s.charAt(i))) i--;
-        return i;
-    }
-
-    public boolean isDigitOrLetter(char ch){
+    boolean isDigitalOrLetter(char ch){
         return ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z';
     }
 
-    public boolean equalsIgnoreCase(char ch1 , char ch2){
+    int getNext(String s , int i){
+        while (i < s.length() && !isDigitalOrLetter(s.charAt(i))) i++;
+        return i;
+    }
+
+    int getPre(String s , int i){
+        while (i >= 0 && !isDigitalOrLetter(s.charAt(i))) i--;
+        return i;
+    }
+
+    boolean equalsIgnoreCase(char ch1 , char ch2){
         return Character.toLowerCase(ch1) == Character.toLowerCase(ch2);
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

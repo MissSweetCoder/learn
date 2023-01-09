@@ -47,15 +47,15 @@ public class ValidPalindromeIi{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean validPalindrome(String s) {
-        return check(s ,0 , s.length() - 1 , 1);
+        return check(s , 0 , s.length() - 1 , 1);
     }
 
-    public boolean check(String s , int l , int r , int times){
+    boolean check(String s , int l , int r , int times){
         while (l < r){
             if (s.charAt(l) != s.charAt(r)){
                 return times > 0 && (check(s , l + 1 , r , times - 1) || check(s , l , r - 1 , times - 1));
             }
-            l++ ; r-- ;
+            l++ ; r--;
         }
         return true;
     }
