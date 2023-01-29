@@ -74,23 +74,25 @@ public class Test {
 //            iterator.remove();
 //        }
 
-        Map<String , String> map = new HashMap<>();
-        map.put("key"  , "value");
-        Set<String> keySet = map.keySet();
-        Collection<String> values = map.values();
-        Set<Map.Entry<String, String>> entries = map.entrySet();
-        map.forEach((k , v) -> {
-            System.out.println(k + " " + v);
-        });
+//        Map<String , String> map = new HashMap<>();
+//        map.put("key"  , "value");
+//        Set<String> keySet = map.keySet();
+//        Collection<String> values = map.values();
+//        Set<Map.Entry<String, String>> entries = map.entrySet();
+//        map.forEach((k , v) -> {
+//            System.out.println(k + " " + v);
+//        });
+//
+//        List<String> a = new ArrayList<String>();
+//        a.add("1");
+//        a.add("2");
+//        List<String> list = a.subList(0, 1);
+//        list.add(0,"1");
 
-        List<String> a = new ArrayList<String>();
-        a.add("1");
-        a.add("2");
-        List<String> list = a.subList(0, 1);
-        list.add(0,"1");
-
-//        SimpleDateFormat sdfutc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//        System.out.println(sdfutc.format(new Date(1669197372755L)));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MONTH, -1);
+        System.out.println(cal.getTime());
 
     }
 
