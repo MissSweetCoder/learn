@@ -1,10 +1,15 @@
 package com.ziroom.design;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ziroom.design.单例.IdGenerator1;
 import com.ziroom.design.单例.IdGenerator2;
 import com.ziroom.design.单例.IdGenerator4;
 import com.ziroom.design.建造者.ResourcePoolConfig;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
@@ -26,74 +31,7 @@ import java.util.function.BiConsumer;
  */
 public class Test {
     public static void main(String[] args) {
-//        printTimeStamp("2022-06-01 00:00:00");
-//        printTimeStamp("2022-06-30 23:59:59");
-//        printTimeStamp("2022-07-01 00:00:00");
-//        printTimeStamp("2022-07-31 23:59:59");
-//        printTimeStamp("2022-08-01 00:00:00");
-//        printTimeStamp("2022-08-31 23:59:59");
-//        printTimeStamp("2022-09-01 00:00:00");
-//        printTimeStamp("2022-09-30 23:59:59");
-//        printTimeStamp("2022-10-01 00:00:00");
-//        printTimeStamp("2022-10-31 23:59:59");
-//        printTimeStamp("2022-11-01 00:00:00");
-//        printTimeStamp("2022-11-30 23:59:59");
-//        printTimeStamp("2022-12-01 00:00:00");
-//        printTimeStamp("2022-12-31 23:59:59");
-
-//        List<String> list = new ArrayList<>();
-//        list.add("a");
-//        list.add("b");
-//        String[] array = new String[2];
-//        list.toArray(array);
-//        for (int i = 0 ; i < array.length ; i++){
-//            System.out.println(array[i]);
-//        }
-
-//        String[] array = new String[]{"a" , "b"};
-//        List<String> list = Arrays.asList(array);
-//        array[0] = "1";
-//        list.stream().forEach(System.out::println);
-
-//        List<String> a = new ArrayList<String>();
-//        a.add("1");
-//        a.add("2");
-//        for (String temp : a) {
-//            if ("2".equals(temp)) {
-//                a.remove(temp);
-//            }
-//        }
-//        a.stream().forEach(System.out::println);
-
-//        List<String> a = new ArrayList<String>();
-//        a.add("1");
-//        a.add("2");
-//        Iterator<String> iterator = a.iterator();
-//        while (iterator.hasNext()){
-//            System.out.println(iterator.next());
-//            iterator.remove();
-//        }
-
-//        Map<String , String> map = new HashMap<>();
-//        map.put("key"  , "value");
-//        Set<String> keySet = map.keySet();
-//        Collection<String> values = map.values();
-//        Set<Map.Entry<String, String>> entries = map.entrySet();
-//        map.forEach((k , v) -> {
-//            System.out.println(k + " " + v);
-//        });
-//
-//        List<String> a = new ArrayList<String>();
-//        a.add("1");
-//        a.add("2");
-//        List<String> list = a.subList(0, 1);
-//        list.add(0,"1");
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.MONTH, -1);
-        System.out.println(cal.getTime());
-
+        System.out.println(UUID.randomUUID());
     }
 
     public static void printTimeStamp(String s) {
@@ -113,5 +51,13 @@ public class Test {
             T.getId();
             U.getId();
         };
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class User {
+        private String id;
     }
 }
