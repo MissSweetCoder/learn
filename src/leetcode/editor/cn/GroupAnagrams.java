@@ -46,20 +46,19 @@ public class GroupAnagrams{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String , List<String>> map = new HashMap<>();
-        for (String str : strs){
+        List<List<String>> ans = new ArrayList<>();
+        Map<String,List<String>> map = new HashMap<>();
+        for (String str : strs) {
             char[] ch = str.toCharArray();
             Arrays.sort(ch);
-            String s = new String(ch);
-            if (!map.containsKey(s)){
-                map.put(s , new ArrayList<>());
+            String key = new String(ch);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
             }
-            map.get(s).add(str);
+            map.get(key).add(str);
         }
-
-        List<List<String>> ans = new ArrayList<>();
-        for (List<String> list : map.values()){
-            ans.add(list);
+        for (List<String> value : map.values()) {
+            ans.add(value);
         }
         return ans;
     }
