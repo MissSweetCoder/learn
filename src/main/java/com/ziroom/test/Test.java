@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -110,29 +112,76 @@ public class Test {
 //        }).handle((result,error) -> {
 //            return 2;
 //        }).thenApply(Objects::toString).thenAccept(System.out::println);
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
-        List<CompletableFuture<Integer>> collect = IntStream.range(1, 10).mapToObj(i -> {
-            CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
-                if (i == 5) {
-                    throw new RuntimeException("test");
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(i);
-                return i;
-            }, executorService)
-                    .exceptionally((error) -> {
-                        error.printStackTrace();
-                        return 100;
-                    });
-            return future;
-        }).collect(Collectors.toList());
-        CompletableFuture.allOf(collect.toArray(new CompletableFuture[]{})).join();
+//        ExecutorService executorService = Executors.newFixedThreadPool(10);
+//        List<CompletableFuture<Integer>> collect = IntStream.range(1, 10).mapToObj(i -> {
+//            CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+//                if (i == 5) {
+//                    throw new RuntimeException("test");
+//                }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(i);
+//                return i;
+//            }, executorService)
+//                    .exceptionally((error) -> {
+//                        error.printStackTrace();
+//                        return 100;
+//                    });
+//            return future;
+//        }).collect(Collectors.toList());
+//        CompletableFuture.allOf(collect.toArray(new CompletableFuture[]{})).join();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{" +
+                "\"query\": {" +
+                "\"bool\": {" +
+                "\"must\": [");
+        String timeJosn = "{" +
+                "\"range\": {" +
+                "\"crtTime\": {" +
+                "\"gte\": \"" + "2023-03-06 12:02:00" + "\"," +
+                "\"lt\": \"" + "2023-03-06 12:03:00" + "\"" +
+                "}" +
+                "}" +
+                "}";
+        sb.append(timeJosn);
+        String reqJson = ",{\n" +
+                    "        \"match\": {\n" +
+                    "\"requestUri.keyword\": \"" + "requestUrl" + "\"" +
+                    "        }\n" +
+                    "      }";
 
-
+        sb.append(reqJson);
+        sb.append("]");
+        sb.append("}");
+        sb.append("},");
+        sb.append("\"size\": 0,");
+        sb.append("\"aggs\":{");
+        sb.append("\"all_tags\":{");
+        sb.append("\"terms\":{");
+        sb.append("\"field\":\"requestUri.keyword\",");
+        sb.append("\"size\": 99999999");
+        sb.append("},");
+        sb.append("\"aggs\": {");
+        sb.append("\"serCode\": {");
+        sb.append("\"terms\": {");
+        sb.append("\"field\": \"serviceId.keyword\"");
+        sb.append("},");
+        sb.append("\"aggs\": {");
+        sb.append("\"avg_delay\": {");
+        sb.append("\"avg\": {");
+        sb.append("\"field\": \"costTimes\"");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        sb.append("}");
+        System.out.println(sb.toString());
     }
 
     public static Optional<Double> inverse(Double x){

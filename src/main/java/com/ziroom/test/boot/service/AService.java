@@ -19,6 +19,5 @@ public class AService {
 
     @Async
     public void async() {
-
     }
 }
