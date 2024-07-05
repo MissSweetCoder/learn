@@ -44,10 +44,10 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://10.177.86.36:3328/open_product");
+        dsc.setUrl("");
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("KF0lgAW7vxicH0J4aPaK");
+        dsc.setUsername("");
+        dsc.setPassword("");
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
@@ -65,7 +65,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         // 数据库中表的名字，表示要对哪些表进行自动生成controller service、mapper...
-        strategy.setInclude("dg_service_tianqing");
+        strategy.setInclude("dcn_api_instance_alarm");
         // 数据库表映射到实体的命名策略,驼峰命名法
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 生成实体时去掉表前缀，比如edu_course，如果不加下面这句，生成的实体类名字就是：EduCourse
